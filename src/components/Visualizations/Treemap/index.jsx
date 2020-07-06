@@ -44,7 +44,13 @@ const Treemap = ({ dimensions }) => {
               stroke="#000"
               fill="blue"
             />
-            <image href="https://images.pexels.com/photos/1067333/pexels-photo-1067333.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"></image>
+            <image
+            href="https://images.pexels.com/photos/1067333/pexels-photo-1067333.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            x={leave.x0}
+            y={leave.y0}
+            width={leave.x1 - leave.x0}
+            height={leave.y1 - leave.y0}
+            />
           </g>
         );
       })}
