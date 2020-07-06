@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-import { select } from "d3";
 
 import Wordcloud from "./Worldcloud";
 import Treemap from "./Treemap";
@@ -11,8 +10,8 @@ const Visualizations = () => {
   const contentRef = useRef();
 
   const [dimensions, setDimensions] = useState({
-    height: contentRef.current?.offsetHeight,
-    width: contentRef.current?.offsetWidth,
+    height: contentRef.current?.offsetHeight || 0,
+    width: contentRef.current?.offsetWidth || 0,
   });
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const Visualizations = () => {
     window.addEventListener("resize", () =>
       handleResize(contentRef, setDimensions)
     );
-  }, [contentRef.current?.offsetWidth]);
+  }, []);
 
   return (
     <div className="campus-tent-map">

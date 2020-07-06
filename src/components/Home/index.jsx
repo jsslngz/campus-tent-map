@@ -8,10 +8,10 @@ const Home = () => {
         <Link to="/reboot-the-world-viz">Reboot the World</Link>
       </div>
       <div>
-        <a>Research</a>
+        <a href="none">Research</a>
       </div>
       <div>
-        <a>All the Ideas</a>
+        <a href="none">All the Ideas</a>
       </div>
     </div>
   );

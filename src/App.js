@@ -1,9 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Visualizations from "./components/Visualizations";
-import useResizeObserver from "./components/resizeObserver";
 import "./index.css";
 
 const App = () => {
