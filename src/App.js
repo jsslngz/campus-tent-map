@@ -12,7 +12,7 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/reboot-the-world-viz">
+        <Route path="/most-important-concepts">
           <Visualizations />
         </Route>
       </Switch>

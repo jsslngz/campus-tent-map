@@ -17,18 +17,22 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 60px 40px 0;
+  padding: 3vh 3vw 0;
 }
 
 .footer {
   display: flex;
   justify-content: flex-end;
-  margin: 40px;
+  margin: 2vh 2vw;
 }
 
 .buttons-right {
   display: flex;
   flex-direction: row;
+}
+
+.buttons {
+  margin: 0 30px;
 }
 
 .title {
@@ -42,15 +46,21 @@ body {
 .subtitle {
   color: #606060;
   font-size: 15px;
+  width: 800px;
 }
 
-.research {
+.audience,
+.survey {
   text-transform: uppercase;
-  padding: 13px 10px;
+  padding: 10px 15px;
   background-color: #0099ff;
   color: #fff;
   font-weight: 900;
   margin-right: 10px;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 1px;
+  height: 25px;
 }
 
 .theme {
@@ -72,4 +82,150 @@ body {
 
 .content {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(25, 118, 205);
+  background: radial-gradient(
+    circle,
+    rgba(25, 118, 205, 1) 0%,
+    rgba(44, 85, 157, 1) 100%
+  );
+}
+
+.logos {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.logos.bottom {
+  margin-top: 30px;
+}
+
+.logos.top {
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+}
+
+.campus-button {
+  text-transform: uppercase;
+  margin: 10px 0;
+  padding: 20px;
+  color: #fff !important;
+  font-weight: 700;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 35px;
+  border-radius: 30px;
+}
+
+.campus-logo-home {
+  margin-right: 3vh;
+  margin-bottom: 3vh;
+  height: 13vh;
+}
+
+.cappra-logo-home {
+  margin-left: 30px;
+  height: 120px;
+}
+
+a {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.idea {
+  background-color: #018b9d;
+}
+
+.concepts {
+  background-color: #2cd3c2;
+}
+
+.sheets {
+  background-color: #4d008c;
+}
+
+.pdf {
+  background-color: #0098fd;
+}
+
+.treemap-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+.legend-text {
+  fill: #606060;
+  font-weight: 700;
+}
+
+.loading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: #0098fd;
+}
+
+.cloud-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.language-selector,
+.category-selector {
+  margin-right: 10px;
+  width: 230px;
+}
+
+@media only screen and (max-width: 850px) {
+  .home {
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .campus-logo-home,
+  .cappra-logo-home {
+    margin: 0 10px 20px;
+    height: 13vh;
+  }
+
+  .logos.bottom {
+    font-size: 30px;
+  }
+
+  .campus-button {
+    font-size: 30px;
+    border-radius: 30px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .campus-tent-map {
+    min-width: 1280px;
+    min-height: 720px;
+  }
+
+  .language-selector,
+  .category-selector {
+    min-width: 125px;
+    font-size: 15px;
+  }
 }

@@ -1,20 +1,28 @@
-import React from "react";
-import { treemap, stratify } from "d3";
+import React, { useState, useEffect } from "react";
+import { treemap, stratify, format, scaleLinear, extent } from "d3";
 
-const Treemap = ({ dimensions }) => {
-  const data = [
-    { name: "Origin", parent: "", value: "" },
-    { name: "group", parent: "Origin", value: 15 },
-    { name: "group2", parent: "Origin", value: 25 },
-    { name: "group3", parent: "Origin", value: 50 },
-    { name: "group4", parent: "Origin", value: 5 },
-    { name: "group5", parent: "Origin", value: 89 },
-    { name: "group6", parent: "Origin", value: 200 },
-  ];
+import { colors, tents } from "../utils";
+
+const Treemap = ({ dimensions, margin, data }) => {
+  const [innerDimensions, setInnerDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  const fontScale = scaleLinear()
+    .range([8, 30])
+    .domain(extent(data.map((d) => d.value)));
+
+  useEffect(() => {
+    setInnerDimensions({
+      width: dimensions.width / 2 - margin.left,
+      height: dimensions.height - margin.top - margin.bottom - 20,
+    });
+  }, [dimensions, margin]);
 
   let root = stratify()
     .id(function (d) {
-      return d.name;
+      return d.group;
     })
     .parentId(function (d) {
       return d.parent;
@@ -24,36 +32,65 @@ const Treemap = ({ dimensions }) => {
     return +d.value;
   });
 
-  treemap()
-    .size([dimensions.width / 2, dimensions.height])
-    .padding(10)(root);
+  treemap().size([innerDimensions.width, innerDimensions.height]).padding(30)(
+    root
+  );
 
   return (
-    <g
-      className="treemapContainer"
-      transform={`translate(${dimensions.width / 2}, 0)`}
-    >
-      {root.leaves().map((leave) => {
-        return (
-          <g>
-            <rect
-              x={leave.x0}
-              y={leave.y0}
-              width={leave.x1 - leave.x0}
-              height={leave.y1 - leave.y0}
-              stroke="#000"
-              fill="blue"
-            />
-            <image
-            href="https://images.pexels.com/photos/1067333/pexels-photo-1067333.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-            x={leave.x0}
-            y={leave.y0}
-            width={leave.x1 - leave.x0}
-            height={leave.y1 - leave.y0}
-            />
-          </g>
-        );
-      })}
+    <g>
+      <foreignObject width="200" height="100" x={margin.left + 25} y={20}>
+        <div className="audience">Subjects</div>
+      </foreignObject>
+      <g
+        className="treemapContainer"
+        transform={`translate(${margin.left}, ${margin.top})`}
+      >
+        {root?.leaves().map((leave) => {
+          const leaveX0 = leave.x0;
+          const leaveY0 = leave.y0;
+          const leaveWidth = leave.x1 - leave.x0;
+          const leaveHeight = leave.y1 - leave.y0;
+          return (
+            <g key={leave.data.group}>
+              <rect
+                x={leaveX0}
+                y={leaveY0}
+                width={leaveWidth}
+                height={leaveHeight}
+                stroke={colors[leave.data.group]}
+                strokeWidth="7px"
+                fill="#fff"
+              />
+
+              {leaveHeight > 30 && leaveWidth > 30 ? (
+                <image
+                  href={tents[leave.data.group]}
+                  x={leaveX0 + 10}
+                  y={leaveY0 + 10}
+                  width={leaveWidth - 20 > 0 ? leaveWidth - 20 : 0}
+                  height={leaveHeight - 50 > 0 ? leaveHeight - 50 : 0}
+                />
+              ) : (
+                <g />
+              )}
+              {leaveHeight > 25 && leaveWidth > 25 ? (
+                <text
+                  className="treemap-text"
+                  x={leaveX0 + leaveWidth / 2}
+                  y={leaveY0 + leaveHeight - 10}
+                  fill={colors[leave.data.group]}
+                  fontSize={fontScale(leave.data.value)}
+                  textAnchor={"middle"}
+                >
+                  {format(".0%")(leave.data.value / data.total.value)}
+                </text>
+              ) : (
+                <g />
+              )}
+            </g>
+          );
+        })}
+      </g>
     </g>
   );
 };
